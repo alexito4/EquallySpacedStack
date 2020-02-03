@@ -27,9 +27,9 @@ public struct EquallySpacedHStack: View {
     
     // MARK: ForEach support
     
-    public init<Data, Content: View>(@ViewBuilder content: () -> ForEach<Data, Content>) {
+    public init<Data, Content: View, ID : Hashable>(@ViewBuilder content: () -> ForEach<Data, ID, Content>) {
         let views = content()
-        self.items = views.data.map({ AnyView(views.content($0.identifiedValue)) })
+        self.items = views.data.map({ AnyView(views.content($0)) })
     }
     
     public var body: some View {
@@ -69,9 +69,9 @@ public struct EquallySpacedVStack: View {
     
     // MARK: ForEach support
     
-    public init<Data, Content: View>(@ViewBuilder content: () -> ForEach<Data, Content>) {
+    public init<Data, Content: View, ID : Hashable>(@ViewBuilder content: () -> ForEach<Data, ID, Content>) {
         let views = content()
-        self.items = views.data.map({ AnyView(views.content($0.identifiedValue)) })
+        self.items = views.data.map({ AnyView(views.content($0)) })
     }
     
     public var body: some View {
